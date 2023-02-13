@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Pave Bank</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <style>
+    body {
+      background: linear-gradient(to bottom, #FFFF66, #FFCC99);
+    }
+
+    .center {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .title-box {
+      display: inline-block;
+      padding: 20px;
+      border-radius: 50px;
+      background-color: white;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="center">
+    <div class="title-box">
+      <h1 id="title">Nothing to see here</h1>
+    </div>
+  </div>
+  <script>
+    var titles = ["Nothing to see here", "Turing complete banking", "Unbinding cyclomatic complexity", "Upgrading fiat to 2.0", "Quantum proofing banking", "Installing economy 3.0", "Recentralizing decentralized finance", "Banking unbanked AGI", "Waiting for enabling tech", "Reducing focus.lengthOf to 1", "Finetuning financial latent space embeddings", "Enabling utf32 account", "Disambiguating currency types",];
+    var title = document.getElementById("title");
+    setInterval(function () {
+      var randomIndex = Math.floor(Math.random() * titles.length);
+      title.innerText = titles[randomIndex];
+    }, 3000);
+  </script>
+</body>
+
+</html>
