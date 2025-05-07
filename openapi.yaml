@@ -1,0 +1,2964 @@
+{
+  "components": {
+    "responses": {
+      "APIError": {
+        "content": {
+          "application/json": {
+            "schema": {
+              "externalDocs": {
+                "url": "https://pkg.go.dev/encore.dev/beta/errs#Error"
+              },
+              "properties": {
+                "code": {
+                  "description": "Error code",
+                  "example": "not_found",
+                  "externalDocs": {
+                    "url": "https://pkg.go.dev/encore.dev/beta/errs#ErrCode"
+                  },
+                  "type": "string"
+                },
+                "details": {
+                  "description": "Error details",
+                  "type": "object"
+                },
+                "message": {
+                  "description": "Error message",
+                  "type": "string"
+                }
+              },
+              "title": "APIError",
+              "type": "object"
+            }
+          }
+        },
+        "description": "Error response"
+      }
+    },
+    "schemas": {
+      "Type": {
+        "type": "string"
+      },
+      "Amount": {
+        "type": "string"
+      },
+      "ParentAccountResponse": {
+        "properties": {
+          "account_type": {
+            "$ref": "#/components/schemas/Type"
+          },
+          "asset": {
+            "$ref": "#/components/schemas/Asset"
+          },
+          "balance_available": {
+            "type": "string"
+          },
+          "balance_total": {
+            "type": "string"
+          },
+          "created_at": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "iban": {
+            "type": "string"
+          },
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "sub_accounts_count": {
+            "format": "int64",
+            "type": "integer"
+          },
+          "sub_accounts_spendable_balance": {
+            "type": "string"
+          },
+          "sub_accounts_total_balance": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "name",
+          "balance_total",
+          "balance_available",
+          "account_type",
+          "asset",
+          "iban",
+          "sub_accounts_count",
+          "sub_accounts_total_balance",
+          "sub_accounts_spendable_balance",
+          "created_at"
+        ],
+        "type": "object"
+      },
+      "SubAccountResponse": {
+        "properties": {
+          "account_type": {
+            "$ref": "#/components/schemas/Type"
+          },
+          "asset": {
+            "$ref": "#/components/schemas/Asset"
+          },
+          "balance_available": {
+            "type": "string"
+          },
+          "balance_total": {
+            "type": "string"
+          },
+          "created_at": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "iban": {
+            "type": "string"
+          },
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "parent_account_id": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "parent_account_id",
+          "name",
+          "balance_total",
+          "balance_available",
+          "account_type",
+          "asset",
+          "iban",
+          "created_at"
+        ],
+        "type": "object"
+      },
+      "Asset": {
+        "type": "string"
+      },
+      "Status": {
+        "type": "string"
+      },
+      "TransferFragmentRes": {
+        "properties": {
+          "amount": {
+            "type": "string"
+          },
+          "asset": {
+            "type": "string"
+          },
+          "created_at": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "destination_iban": {
+            "type": "string"
+          },
+          "estimated_fee": {
+            "type": "string"
+          },
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "status": {
+            "$ref": "#/components/schemas/Status"
+          },
+          "transaction_id": {
+            "type": "string"
+          },
+          "updated_at": {
+            "format": "date-time",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "transaction_id",
+          "name",
+          "description",
+          "destination_iban",
+          "amount",
+          "estimated_fee",
+          "status",
+          "asset",
+          "created_at",
+          "updated_at"
+        ],
+        "type": "object"
+      },
+      "PurposeType": {
+        "type": "string"
+      },
+      "Side": {
+        "type": "string"
+      },
+      "WalletType": {
+        "type": "string"
+      },
+      "Direction": {
+        "type": "string"
+      },
+      "ID": {
+        "type": "string"
+      },
+      "CustomerBulkTransfer": {
+        "properties": {
+          "asset": {
+            "$ref": "#/components/schemas/Asset"
+          },
+          "bulk_transfer_name": {
+            "type": "string"
+          },
+          "executed_at": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "fee_asset": {
+            "$ref": "#/components/schemas/Asset"
+          },
+          "from_account_iban": {
+            "type": "string"
+          },
+          "from_account_id": {
+            "type": "string"
+          },
+          "from_account_name": {
+            "title": "From Details\n",
+            "type": "string"
+          },
+          "from_legal_entity_name": {
+            "type": "string"
+          },
+          "initiated_at": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "initiated_by": {
+            "$ref": "#/components/schemas/CustomerUser"
+          },
+          "processed_at": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "total_amount": {
+            "$ref": "#/components/schemas/Amount"
+          },
+          "total_fees": {
+            "$ref": "#/components/schemas/Amount"
+          },
+          "transfers": {
+            "items": {
+              "$ref": "#/components/schemas/TransferFragmentRes"
+            },
+            "type": "array"
+          }
+        },
+        "required": [
+          "bulk_transfer_name",
+          "total_amount",
+          "asset",
+          "total_fees",
+          "fee_asset",
+          "initiated_by",
+          "initiated_at",
+          "processed_at",
+          "executed_at",
+          "from_account_name",
+          "from_account_iban",
+          "from_account_id",
+          "from_legal_entity_name",
+          "transfers"
+        ],
+        "type": "object"
+      },
+      "CustomerChargeFee": {
+        "properties": {
+          "account_iban": {
+            "type": "string"
+          },
+          "account_name": {
+            "type": "string"
+          },
+          "amount": {
+            "$ref": "#/components/schemas/Amount"
+          },
+          "asset": {
+            "$ref": "#/components/schemas/Asset"
+          },
+          "bank_bic": {
+            "type": "string"
+          },
+          "bank_name": {
+            "type": "string"
+          },
+          "executed_at": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "initiated_at": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "legal_entity_name": {
+            "type": "string"
+          },
+          "processed_at": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "purpose": {
+            "$ref": "#/components/schemas/PurposeType"
+          }
+        },
+        "required": [
+          "account_name",
+          "account_iban",
+          "legal_entity_name",
+          "bank_name",
+          "bank_bic",
+          "amount",
+          "asset",
+          "purpose",
+          "initiated_at",
+          "processed_at",
+          "executed_at"
+        ],
+        "type": "object"
+      },
+      "CustomerCryptoOrder": {
+        "properties": {
+          "base_asset": {
+            "$ref": "#/components/schemas/Asset"
+          },
+          "checked_by": {
+            "$ref": "#/components/schemas/CustomerUser"
+          },
+          "customer_crypto_transfer_deadline": {
+            "description": "Required for sell orders, nil for buy orders.\n",
+            "format": "date-time",
+            "title": "CustomerCryptoTransferDeadline is when the customer must complete their crypto\ntransfer by.\n",
+            "type": "string"
+          },
+          "customer_digital_wallet_address": {
+            "type": "string"
+          },
+          "customer_digital_wallet_id": {
+            "title": "CustomerDigitalAccountID is the ID of the customers wallet.\n",
+            "type": "string"
+          },
+          "customer_digital_wallet_name": {
+            "type": "string"
+          },
+          "customer_digital_wallet_type": {
+            "$ref": "#/components/schemas/WalletType"
+          },
+          "customer_fiat_account_iban": {
+            "type": "string"
+          },
+          "customer_fiat_account_id": {
+            "title": "CustomerFiatAccountID is the ID of the customers fiat account.\n",
+            "type": "string"
+          },
+          "customer_fiat_account_name": {
+            "type": "string"
+          },
+          "customer_legal_entity_id": {
+            "title": "CustomerLegalEntityID is the ID of legal entity making the order.\n",
+            "type": "string"
+          },
+          "customer_legal_entity_name": {
+            "type": "string"
+          },
+          "customer_pays_amount": {
+            "$ref": "#/components/schemas/Amount"
+          },
+          "customer_pays_asset": {
+            "$ref": "#/components/schemas/Asset"
+          },
+          "customer_pays_network_fee_account_address": {
+            "type": "string"
+          },
+          "customer_pays_network_fee_account_id": {
+            "$ref": "#/components/schemas/ID"
+          },
+          "customer_pays_network_fee_amount": {
+            "$ref": "#/components/schemas/Amount"
+          },
+          "customer_pays_network_fee_asset": {
+            "$ref": "#/components/schemas/Asset"
+          },
+          "customer_pays_network_fee_wallet_name": {
+            "type": "string"
+          },
+          "customer_receives_amount": {
+            "$ref": "#/components/schemas/Amount"
+          },
+          "customer_receives_asset": {
+            "$ref": "#/components/schemas/Asset"
+          },
+          "customer_requested_amount": {
+            "$ref": "#/components/schemas/Amount"
+          },
+          "customer_requested_asset": {
+            "$ref": "#/components/schemas/Asset"
+          },
+          "description": {
+            "title": "Description is the description of the order.\n",
+            "type": "string"
+          },
+          "document_ids": {
+            "items": {
+              "type": "string"
+            },
+            "title": "DocumentIDs is the document IDs of updaloaded documents for the order.\n",
+            "type": "array"
+          },
+          "executed_at": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "initiated_at": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "initiated_by": {
+            "$ref": "#/components/schemas/CustomerUser"
+          },
+          "liquidity_provider_fiat_account_id": {
+            "$ref": "#/components/schemas/ID"
+          },
+          "order_type": {
+            "title": "OrderType is the type of order, e.g. Market.\n",
+            "type": "string"
+          },
+          "processed_at": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "quote_asset": {
+            "$ref": "#/components/schemas/Asset"
+          },
+          "side": {
+            "$ref": "#/components/schemas/Side"
+          },
+          "strategy": {
+            "title": "Strategy for the order, e.g. Market\n",
+            "type": "string"
+          },
+          "symbol": {
+            "title": "Symbol of the order, e.g. BTC-USD\n",
+            "type": "string"
+          },
+          "time_in_force": {
+            "title": "TimeInForce specifies how long the order remains in effect, e.g. FillOrKill\n",
+            "type": "string"
+          },
+          "transaction_status": {
+            "$ref": "#/components/schemas/Status"
+          }
+        },
+        "required": [
+          "initiated_by",
+          "checked_by",
+          "transaction_status",
+          "order_type",
+          "symbol",
+          "base_asset",
+          "quote_asset",
+          "side",
+          "time_in_force",
+          "strategy",
+          "customer_legal_entity_id",
+          "customer_legal_entity_name",
+          "customer_digital_wallet_type",
+          "customer_digital_wallet_id",
+          "customer_digital_wallet_name",
+          "customer_digital_wallet_address",
+          "customer_fiat_account_id",
+          "customer_fiat_account_name",
+          "customer_fiat_account_iban",
+          "customer_requested_asset",
+          "customer_requested_amount",
+          "customer_receives_asset",
+          "customer_receives_amount",
+          "customer_pays_asset",
+          "customer_pays_amount",
+          "customer_pays_network_fee_asset",
+          "customer_pays_network_fee_amount",
+          "customer_pays_network_fee_account_id",
+          "customer_pays_network_fee_wallet_name",
+          "customer_pays_network_fee_account_address",
+          "customer_crypto_transfer_deadline",
+          "liquidity_provider_fiat_account_id",
+          "description",
+          "document_ids",
+          "initiated_at",
+          "processed_at",
+          "executed_at"
+        ],
+        "type": "object"
+      },
+      "CustomerDomesticUSDIncoming": {
+        "properties": {
+          "address": {
+            "type": "string"
+          },
+          "amount": {
+            "$ref": "#/components/schemas/Amount"
+          },
+          "asset": {
+            "$ref": "#/components/schemas/Asset"
+          },
+          "comment": {
+            "type": "string"
+          },
+          "country": {
+            "type": "string"
+          },
+          "effective_date": {
+            "format": "date-time",
+            "title": "Transfer date\n",
+            "type": "string"
+          },
+          "executed_at": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "fed_reference_number_omad": {
+            "type": "string"
+          },
+          "fee_amount": {
+            "$ref": "#/components/schemas/Amount"
+          },
+          "from_id": {
+            "type": "string"
+          },
+          "from_name": {
+            "type": "string"
+          },
+          "from_type": {
+            "title": "Type of originator. Ex. SWIFT, OTHERS\n",
+            "type": "string"
+          },
+          "initiated_at": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "postcode": {
+            "type": "string"
+          },
+          "processed_at": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "reference": {
+            "title": "Transfer description\n",
+            "type": "string"
+          },
+          "sending_financial_institution": {
+            "type": "string"
+          },
+          "to_account_iban": {
+            "type": "string"
+          },
+          "to_account_id": {
+            "$ref": "#/components/schemas/ID"
+          },
+          "to_account_name": {
+            "type": "string"
+          },
+          "to_bank_bic": {
+            "type": "string"
+          },
+          "to_bank_name": {
+            "type": "string"
+          },
+          "to_id": {
+            "type": "string"
+          },
+          "to_legal_entity_name": {
+            "type": "string"
+          },
+          "to_name": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "asset",
+          "amount",
+          "fee_amount",
+          "to_name",
+          "to_account_id",
+          "to_id",
+          "to_account_name",
+          "to_account_iban",
+          "to_legal_entity_name",
+          "to_bank_name",
+          "to_bank_bic",
+          "from_id",
+          "from_type",
+          "from_name",
+          "sending_financial_institution",
+          "fed_reference_number_omad",
+          "address",
+          "postcode",
+          "country",
+          "reference",
+          "effective_date",
+          "comment",
+          "initiated_at",
+          "processed_at",
+          "executed_at"
+        ],
+        "type": "object"
+      },
+      "CustomerDomesticUSDOutgoing": {
+        "properties": {
+          "additional_details": {
+            "type": "string"
+          },
+          "address_one": {
+            "type": "string"
+          },
+          "address_two": {
+            "type": "string"
+          },
+          "amount": {
+            "$ref": "#/components/schemas/Amount"
+          },
+          "asset": {
+            "$ref": "#/components/schemas/Asset"
+          },
+          "beneficiary_email": {
+            "type": "string"
+          },
+          "beneficiary_name": {
+            "type": "string"
+          },
+          "checked_at": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "checked_by": {
+            "$ref": "#/components/schemas/CustomerUser"
+          },
+          "city": {
+            "type": "string"
+          },
+          "comment": {
+            "type": "string"
+          },
+          "country": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "destination_account_number": {
+            "type": "string"
+          },
+          "destination_account_type": {
+            "type": "string"
+          },
+          "document_ids": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "effective_date": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "executed_at": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "fee_amount": {
+            "$ref": "#/components/schemas/Amount"
+          },
+          "from_account_iban": {
+            "type": "string"
+          },
+          "from_account_id": {
+            "$ref": "#/components/schemas/ID"
+          },
+          "from_account_name": {
+            "type": "string"
+          },
+          "from_bank_bic": {
+            "type": "string"
+          },
+          "from_bank_name": {
+            "type": "string"
+          },
+          "from_legal_entity_name": {
+            "type": "string"
+          },
+          "initiated_at": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "initiated_by": {
+            "$ref": "#/components/schemas/CustomerUser"
+          },
+          "postcode": {
+            "type": "string"
+          },
+          "processed_at": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "state": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "asset",
+          "amount",
+          "fee_amount",
+          "from_account_id",
+          "from_account_name",
+          "from_account_iban",
+          "from_legal_entity_name",
+          "from_bank_name",
+          "from_bank_bic",
+          "destination_account_type",
+          "destination_account_number",
+          "beneficiary_name",
+          "beneficiary_email",
+          "address_one",
+          "address_two",
+          "city",
+          "state",
+          "country",
+          "postcode",
+          "effective_date",
+          "description",
+          "additional_details",
+          "initiated_by",
+          "checked_by",
+          "checked_at",
+          "comment",
+          "document_ids",
+          "initiated_at",
+          "processed_at",
+          "executed_at"
+        ],
+        "type": "object"
+      },
+      "CustomerFiToFiSwiftIncoming": {
+        "properties": {
+          "amount": {
+            "$ref": "#/components/schemas/Amount"
+          },
+          "asset": {
+            "$ref": "#/components/schemas/Asset"
+          },
+          "description": {
+            "title": "Remittance Information\n",
+            "type": "string"
+          },
+          "executed_at": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "fee_amount": {
+            "$ref": "#/components/schemas/Amount"
+          },
+          "fee_asset": {
+            "$ref": "#/components/schemas/Asset"
+          },
+          "from_account_iban": {
+            "type": "string"
+          },
+          "from_account_name": {
+            "title": "Debtor Details (Counterparty)\n",
+            "type": "string"
+          },
+          "from_account_number": {
+            "title": "IBAN might not be present so we will show AccountNumber instead on the frontend\n",
+            "type": "string"
+          },
+          "from_bank_bic": {
+            "type": "string"
+          },
+          "from_bank_name": {
+            "type": "string"
+          },
+          "from_legal_entity_name": {
+            "title": "Might not be present, but we can use it instead of account name on frontend if\nit exists\n",
+            "type": "string"
+          },
+          "initiated_at": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "processed_at": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "to_account_iban": {
+            "type": "string"
+          },
+          "to_account_id": {
+            "type": "string"
+          },
+          "to_account_name": {
+            "title": "Creditor Details\n",
+            "type": "string"
+          },
+          "to_bank_bic": {
+            "type": "string"
+          },
+          "to_bank_name": {
+            "type": "string"
+          },
+          "to_legal_entity_name": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "amount",
+          "asset",
+          "description",
+          "initiated_at",
+          "processed_at",
+          "executed_at",
+          "fee_amount",
+          "fee_asset",
+          "from_account_name",
+          "from_account_iban",
+          "from_account_number",
+          "from_legal_entity_name",
+          "from_bank_name",
+          "from_bank_bic",
+          "to_account_name",
+          "to_account_iban",
+          "to_account_id",
+          "to_legal_entity_name",
+          "to_bank_name",
+          "to_bank_bic"
+        ],
+        "type": "object"
+      },
+      "CustomerFxTrade": {
+        "properties": {
+          "buy_account_iban": {
+            "type": "string"
+          },
+          "buy_account_id": {
+            "type": "string"
+          },
+          "buy_account_name": {
+            "title": "Buy Details\n",
+            "type": "string"
+          },
+          "buy_amount": {
+            "$ref": "#/components/schemas/Amount"
+          },
+          "buy_asset": {
+            "$ref": "#/components/schemas/Asset"
+          },
+          "checked_at": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "checked_by": {
+            "$ref": "#/components/schemas/CustomerUser"
+          },
+          "conversion_rate": {
+            "title": "Rate is 1 unit of sell currency to rate units of buy currency\n",
+            "type": "string"
+          },
+          "executed_at": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "fee_amount": {
+            "$ref": "#/components/schemas/Amount"
+          },
+          "fee_asset": {
+            "$ref": "#/components/schemas/Asset"
+          },
+          "initiated_at": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "initiated_by": {
+            "$ref": "#/components/schemas/CustomerUser"
+          },
+          "processed_at": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "sell_account_iban": {
+            "type": "string"
+          },
+          "sell_account_id": {
+            "type": "string"
+          },
+          "sell_account_name": {
+            "title": "Sell Details\n",
+            "type": "string"
+          },
+          "sell_amount": {
+            "$ref": "#/components/schemas/Amount"
+          },
+          "sell_asset": {
+            "$ref": "#/components/schemas/Asset"
+          }
+        },
+        "required": [
+          "initiated_at",
+          "processed_at",
+          "executed_at",
+          "initiated_by",
+          "checked_at",
+          "checked_by",
+          "sell_amount",
+          "sell_asset",
+          "buy_amount",
+          "buy_asset",
+          "fee_asset",
+          "fee_amount",
+          "conversion_rate",
+          "sell_account_name",
+          "sell_account_iban",
+          "sell_account_id",
+          "buy_account_name",
+          "buy_account_iban",
+          "buy_account_id"
+        ],
+        "type": "object"
+      },
+      "CustomerGPSSIn": {
+        "properties": {
+          "amount": {
+            "$ref": "#/components/schemas/Amount"
+          },
+          "asset": {
+            "$ref": "#/components/schemas/Asset"
+          },
+          "description": {
+            "type": "string"
+          },
+          "executed_at": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "fee_amount": {
+            "$ref": "#/components/schemas/Amount"
+          },
+          "fee_asset": {
+            "$ref": "#/components/schemas/Asset"
+          },
+          "from_account_iban": {
+            "type": "string"
+          },
+          "from_account_name": {
+            "title": "From Details (Counterparty)\n",
+            "type": "string"
+          },
+          "from_bank_bic": {
+            "title": "Source SWIFT\n",
+            "type": "string"
+          },
+          "from_bank_name": {
+            "title": "Get from bank domain\n",
+            "type": "string"
+          },
+          "initiated_at": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "processed_at": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "to_account_iban": {
+            "type": "string"
+          },
+          "to_account_id": {
+            "type": "string"
+          },
+          "to_account_name": {
+            "title": "Beneficiary Details\n",
+            "type": "string"
+          },
+          "to_bank_bic": {
+            "title": "Destination SWIFT\n",
+            "type": "string"
+          },
+          "to_bank_name": {
+            "type": "string"
+          },
+          "to_legal_entity_name": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "amount",
+          "asset",
+          "description",
+          "initiated_at",
+          "processed_at",
+          "executed_at",
+          "fee_amount",
+          "fee_asset",
+          "from_account_name",
+          "from_account_iban",
+          "from_bank_name",
+          "from_bank_bic",
+          "to_account_name",
+          "to_account_iban",
+          "to_account_id",
+          "to_legal_entity_name",
+          "to_bank_name",
+          "to_bank_bic"
+        ],
+        "type": "object"
+      },
+      "CustomerGPSSOut": {
+        "properties": {
+          "amount": {
+            "$ref": "#/components/schemas/Amount"
+          },
+          "asset": {
+            "$ref": "#/components/schemas/Asset"
+          },
+          "attachment_id": {
+            "type": "string"
+          },
+          "checked_at": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "checked_by": {
+            "$ref": "#/components/schemas/CustomerUser"
+          },
+          "description": {
+            "type": "string"
+          },
+          "executed_at": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "fee_amount": {
+            "$ref": "#/components/schemas/Amount"
+          },
+          "fee_asset": {
+            "$ref": "#/components/schemas/Asset"
+          },
+          "from_account_iban": {
+            "type": "string"
+          },
+          "from_account_id": {
+            "type": "string"
+          },
+          "from_account_name": {
+            "title": "From Details\n",
+            "type": "string"
+          },
+          "from_bank_bic": {
+            "type": "string"
+          },
+          "from_bank_name": {
+            "type": "string"
+          },
+          "from_legal_entity_name": {
+            "type": "string"
+          },
+          "initiated_at": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "initiated_by": {
+            "$ref": "#/components/schemas/CustomerUser"
+          },
+          "is_to_georgian_state_treasury": {
+            "title": "IsToGeorgianStateTreasury is true when sending to Georgian State Treasury,\nfalse if normal transfer to other Georgian Banks\n",
+            "type": "boolean"
+          },
+          "processed_at": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "tax_code": {
+            "type": "string"
+          },
+          "tax_payer_code": {
+            "type": "string"
+          },
+          "tax_payer_name": {
+            "title": "Tax Payer Details (When sending to Georgian State Treasury, empty if normal\ntransfer to other Georgian Banks)\n",
+            "type": "string"
+          },
+          "to_account_iban": {
+            "title": "Will be empty for Georgian State Treasury\n",
+            "type": "string"
+          },
+          "to_account_name": {
+            "title": "Beneficiary Details (Counterparty)\n",
+            "type": "string"
+          },
+          "to_bank_bic": {
+            "type": "string"
+          },
+          "to_bank_name": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "amount",
+          "asset",
+          "description",
+          "initiated_at",
+          "processed_at",
+          "executed_at",
+          "attachment_id",
+          "fee_amount",
+          "fee_asset",
+          "initiated_by",
+          "checked_by",
+          "checked_at",
+          "is_to_georgian_state_treasury",
+          "tax_payer_name",
+          "tax_payer_code",
+          "tax_code",
+          "from_account_name",
+          "from_account_iban",
+          "from_account_id",
+          "from_legal_entity_name",
+          "from_bank_name",
+          "from_bank_bic",
+          "to_account_name",
+          "to_account_iban",
+          "to_bank_name",
+          "to_bank_bic"
+        ],
+        "type": "object"
+      },
+      "CustomerManualJournalEntry": {
+        "properties": {
+          "amount": {
+            "$ref": "#/components/schemas/Amount"
+          },
+          "asset": {
+            "$ref": "#/components/schemas/Asset"
+          },
+          "description": {
+            "type": "string"
+          },
+          "executed_at": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "from_account_iban": {
+            "type": "string"
+          },
+          "from_account_name": {
+            "title": "From Details (Debit)\n",
+            "type": "string"
+          },
+          "from_legal_entity_id": {
+            "type": "string"
+          },
+          "from_legal_entity_name": {
+            "title": "Will be JSC PAVE BANK GEORGIA if it's from an internal account\n",
+            "type": "string"
+          },
+          "includes_internal_account": {
+            "title": "If the transaction includes an internal account, we don't want to show the\ndetails of the internal account\n",
+            "type": "boolean"
+          },
+          "initiated_at": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "processed_at": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "to_account_iban": {
+            "type": "string"
+          },
+          "to_account_name": {
+            "title": "To Details (Credit)\n",
+            "type": "string"
+          },
+          "to_legal_entity_id": {
+            "type": "string"
+          },
+          "to_legal_entity_name": {
+            "title": "Will be JSC PAVE BANK GEORGIA if it's to an internal account\n",
+            "type": "string"
+          }
+        },
+        "required": [
+          "amount",
+          "asset",
+          "description",
+          "initiated_at",
+          "processed_at",
+          "executed_at",
+          "from_account_name",
+          "from_account_iban",
+          "from_legal_entity_name",
+          "from_legal_entity_id",
+          "to_account_name",
+          "to_account_iban",
+          "to_legal_entity_name",
+          "to_legal_entity_id",
+          "includes_internal_account"
+        ],
+        "type": "object"
+      },
+      "CustomerP2P": {
+        "properties": {
+          "amount": {
+            "$ref": "#/components/schemas/Amount"
+          },
+          "asset": {
+            "$ref": "#/components/schemas/Asset"
+          },
+          "attachment_id": {
+            "type": "string"
+          },
+          "checked_at": {
+            "format": "date-time",
+            "title": "Will be empty if there is no checker\n",
+            "type": "string"
+          },
+          "checked_by": {
+            "$ref": "#/components/schemas/CustomerUser"
+          },
+          "description": {
+            "type": "string"
+          },
+          "executed_at": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "from_account_iban": {
+            "type": "string"
+          },
+          "from_account_id": {
+            "type": "string"
+          },
+          "from_account_name": {
+            "title": "From Details\n",
+            "type": "string"
+          },
+          "from_bank_bic": {
+            "type": "string"
+          },
+          "from_bank_name": {
+            "type": "string"
+          },
+          "from_legal_entity_id": {
+            "type": "string"
+          },
+          "from_legal_entity_name": {
+            "type": "string"
+          },
+          "initiated_at": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "initiated_by": {
+            "$ref": "#/components/schemas/CustomerUser"
+          },
+          "is_internal_transfer": {
+            "title": "Indicates if the transaction is an internal transfer within the same legal\nentity\n",
+            "type": "boolean"
+          },
+          "processed_at": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "to_account_iban": {
+            "type": "string"
+          },
+          "to_account_id": {
+            "type": "string"
+          },
+          "to_account_name": {
+            "title": "To Details\n",
+            "type": "string"
+          },
+          "to_bank_bic": {
+            "type": "string"
+          },
+          "to_bank_name": {
+            "type": "string"
+          },
+          "to_legal_entity_id": {
+            "type": "string"
+          },
+          "to_legal_entity_name": {
+            "type": "string"
+          },
+          "transfer_type": {
+            "$ref": "#/components/schemas/TransferType"
+          }
+        },
+        "required": [
+          "amount",
+          "asset",
+          "description",
+          "attachment_id",
+          "initiated_at",
+          "processed_at",
+          "executed_at",
+          "initiated_by",
+          "checked_by",
+          "checked_at",
+          "is_internal_transfer",
+          "transfer_type",
+          "from_account_name",
+          "from_account_iban",
+          "from_account_id",
+          "from_legal_entity_id",
+          "from_legal_entity_name",
+          "from_bank_name",
+          "from_bank_bic",
+          "to_account_name",
+          "to_account_iban",
+          "to_account_id",
+          "to_legal_entity_id",
+          "to_legal_entity_name",
+          "to_bank_name",
+          "to_bank_bic"
+        ],
+        "type": "object"
+      },
+      "CustomerQcpSettlement": {
+        "properties": {
+          "base_amount": {
+            "$ref": "#/components/schemas/Amount"
+          },
+          "base_asset": {
+            "$ref": "#/components/schemas/Asset"
+          },
+          "base_direction": {
+            "$ref": "#/components/schemas/Direction"
+          },
+          "crypto_trading_pool_fireblocks_vault_id": {
+            "title": "CryptoTradingPoolFireblocksVaultID is the fireblocks vault ID of the crypto\ntrading pool\n",
+            "type": "string"
+          },
+          "executed_at": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "initiated_at": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "liquidity_provider_digital_wallet_address": {
+            "title": "LiquidityProviderDigitalWalletAddress is the address of the liquidity providers\nwallet.\n",
+            "type": "string"
+          },
+          "liquidity_provider_digital_wallet_id": {
+            "$ref": "#/components/schemas/ID"
+          },
+          "liquidity_provider_digital_wallet_name": {
+            "title": "LiquidityProviderDigitalWalletName is the name of the liquidity providers\nwallet.\n",
+            "type": "string"
+          },
+          "liquidity_provider_digital_wallet_type": {
+            "$ref": "#/components/schemas/WalletType"
+          },
+          "liquidity_provider_legal_entity_id": {
+            "title": "LiquidityProviderLegalEntityID is the legal entity ID of the liquidity provider\n",
+            "type": "string"
+          },
+          "liquidity_provider_legal_entity_name": {
+            "title": "LiquidityProviderLegalEntityName is the name of the liquidity provider.\n",
+            "type": "string"
+          },
+          "network_asset": {
+            "$ref": "#/components/schemas/Asset"
+          },
+          "network_fee_amount": {
+            "$ref": "#/components/schemas/Amount"
+          },
+          "processed_at": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "quote_amount": {
+            "$ref": "#/components/schemas/Amount"
+          },
+          "quote_asset": {
+            "$ref": "#/components/schemas/Asset"
+          },
+          "quote_direction": {
+            "$ref": "#/components/schemas/Direction"
+          },
+          "related_order_ids": {
+            "items": {
+              "$ref": "#/components/schemas/ID"
+            },
+            "title": "RelatedOrderIDs are the orders related to this settlement.\n",
+            "type": "array"
+          },
+          "status": {
+            "$ref": "#/components/schemas/Status"
+          },
+          "transaction_hash": {
+            "title": "TransactionHash is the hash of the transaction on the blockchain.\n",
+            "type": "string"
+          }
+        },
+        "required": [
+          "status",
+          "base_asset",
+          "base_amount",
+          "base_direction",
+          "quote_asset",
+          "quote_amount",
+          "quote_direction",
+          "network_asset",
+          "network_fee_amount",
+          "crypto_trading_pool_fireblocks_vault_id",
+          "liquidity_provider_legal_entity_id",
+          "liquidity_provider_legal_entity_name",
+          "liquidity_provider_digital_wallet_type",
+          "liquidity_provider_digital_wallet_id",
+          "liquidity_provider_digital_wallet_name",
+          "liquidity_provider_digital_wallet_address",
+          "transaction_hash",
+          "related_order_ids",
+          "initiated_at",
+          "processed_at",
+          "executed_at"
+        ],
+        "type": "object"
+      },
+      "CustomerSegregatedWalletIncoming": {
+        "properties": {
+          "amount": {
+            "$ref": "#/components/schemas/Amount"
+          },
+          "amount_usd": {
+            "$ref": "#/components/schemas/Amount"
+          },
+          "asset": {
+            "$ref": "#/components/schemas/Asset"
+          },
+          "executed_at": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "from_address": {
+            "title": "From details\n",
+            "type": "string"
+          },
+          "initiated_at": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "network_fee": {
+            "$ref": "#/components/schemas/Amount"
+          },
+          "network_fee_asset": {
+            "$ref": "#/components/schemas/Asset"
+          },
+          "processed_at": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "to_account_id": {
+            "title": "To details\n",
+            "type": "string"
+          },
+          "to_account_name": {
+            "type": "string"
+          },
+          "to_address": {
+            "type": "string"
+          },
+          "to_bank_bic": {
+            "type": "string"
+          },
+          "to_bank_name": {
+            "type": "string"
+          },
+          "to_legal_entity_id": {
+            "type": "string"
+          },
+          "to_legal_entity_name": {
+            "type": "string"
+          },
+          "tx_hash": {
+            "title": "Fireblocks details\n",
+            "type": "string"
+          }
+        },
+        "required": [
+          "asset",
+          "amount",
+          "amount_usd",
+          "from_address",
+          "to_account_id",
+          "to_account_name",
+          "to_address",
+          "to_legal_entity_id",
+          "to_legal_entity_name",
+          "to_bank_name",
+          "to_bank_bic",
+          "tx_hash",
+          "network_fee",
+          "network_fee_asset",
+          "initiated_at",
+          "processed_at",
+          "executed_at"
+        ],
+        "type": "object"
+      },
+      "CustomerSegregatedWalletOutgoing": {
+        "properties": {
+          "amount": {
+            "$ref": "#/components/schemas/Amount"
+          },
+          "amount_usd": {
+            "$ref": "#/components/schemas/Amount"
+          },
+          "asset": {
+            "$ref": "#/components/schemas/Asset"
+          },
+          "checked_at": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "checked_by": {
+            "$ref": "#/components/schemas/CustomerUser"
+          },
+          "description": {
+            "type": "string"
+          },
+          "document_ids": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "executed_at": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "fee_account_id": {
+            "type": "string"
+          },
+          "fee_amount": {
+            "$ref": "#/components/schemas/Amount"
+          },
+          "fee_asset": {
+            "$ref": "#/components/schemas/Asset"
+          },
+          "from_account_id": {
+            "type": "string"
+          },
+          "from_account_name": {
+            "title": "From details\n",
+            "type": "string"
+          },
+          "from_address": {
+            "type": "string"
+          },
+          "from_bank_bic": {
+            "type": "string"
+          },
+          "from_bank_name": {
+            "type": "string"
+          },
+          "from_legal_entity_id": {
+            "type": "string"
+          },
+          "from_legal_entity_name": {
+            "type": "string"
+          },
+          "initiated_at": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "initiated_by": {
+            "$ref": "#/components/schemas/CustomerUser"
+          },
+          "network_fee": {
+            "$ref": "#/components/schemas/Amount"
+          },
+          "network_fee_account_id": {
+            "type": "string"
+          },
+          "network_fee_asset": {
+            "$ref": "#/components/schemas/Asset"
+          },
+          "processed_at": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "to_account_id": {
+            "title": "To details\n",
+            "type": "string"
+          },
+          "to_account_name": {
+            "type": "string"
+          },
+          "to_address": {
+            "type": "string"
+          },
+          "to_legal_entity_id": {
+            "type": "string"
+          },
+          "to_legal_entity_name": {
+            "type": "string"
+          },
+          "tx_hash": {
+            "title": "Fireblocks details\n",
+            "type": "string"
+          }
+        },
+        "required": [
+          "asset",
+          "amount",
+          "amount_usd",
+          "description",
+          "document_ids",
+          "initiated_by",
+          "checked_by",
+          "checked_at",
+          "from_account_name",
+          "from_account_id",
+          "from_address",
+          "from_legal_entity_id",
+          "from_legal_entity_name",
+          "from_bank_name",
+          "from_bank_bic",
+          "to_account_id",
+          "to_account_name",
+          "to_address",
+          "to_legal_entity_id",
+          "to_legal_entity_name",
+          "tx_hash",
+          "network_fee",
+          "network_fee_asset",
+          "network_fee_account_id",
+          "fee_amount",
+          "fee_asset",
+          "fee_account_id",
+          "initiated_at",
+          "processed_at",
+          "executed_at"
+        ],
+        "type": "object"
+      },
+      "CustomerSwiftIncoming": {
+        "properties": {
+          "amount": {
+            "$ref": "#/components/schemas/Amount"
+          },
+          "asset": {
+            "$ref": "#/components/schemas/Asset"
+          },
+          "description": {
+            "title": "Remittance Information\n",
+            "type": "string"
+          },
+          "executed_at": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "fee_amount": {
+            "$ref": "#/components/schemas/Amount"
+          },
+          "fee_asset": {
+            "$ref": "#/components/schemas/Asset"
+          },
+          "from_account_iban": {
+            "type": "string"
+          },
+          "from_account_name": {
+            "title": "From Details\n",
+            "type": "string"
+          },
+          "from_bank_bic": {
+            "type": "string"
+          },
+          "from_bank_name": {
+            "type": "string"
+          },
+          "from_legal_entity_name": {
+            "title": "Might not be present, but we can use it instead of account name on frontend if\nit exists\n",
+            "type": "string"
+          },
+          "initiated_at": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "processed_at": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "to_account_iban": {
+            "type": "string"
+          },
+          "to_account_id": {
+            "type": "string"
+          },
+          "to_account_name": {
+            "title": "To Details (Counterparty)\n",
+            "type": "string"
+          },
+          "to_bank_bic": {
+            "type": "string"
+          },
+          "to_bank_name": {
+            "type": "string"
+          },
+          "to_legal_entity_name": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "amount",
+          "asset",
+          "description",
+          "initiated_at",
+          "processed_at",
+          "executed_at",
+          "fee_amount",
+          "fee_asset",
+          "from_account_name",
+          "from_account_iban",
+          "from_legal_entity_name",
+          "from_bank_name",
+          "from_bank_bic",
+          "to_account_name",
+          "to_account_iban",
+          "to_account_id",
+          "to_legal_entity_name",
+          "to_bank_name",
+          "to_bank_bic"
+        ],
+        "type": "object"
+      },
+      "CustomerSwiftOutgoing": {
+        "properties": {
+          "amount": {
+            "$ref": "#/components/schemas/Amount"
+          },
+          "asset": {
+            "$ref": "#/components/schemas/Asset"
+          },
+          "attachment_ids": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "checked_at": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "checked_by": {
+            "$ref": "#/components/schemas/CustomerUser"
+          },
+          "description": {
+            "type": "string"
+          },
+          "executed_at": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "fee_amount": {
+            "$ref": "#/components/schemas/Amount"
+          },
+          "fee_asset": {
+            "$ref": "#/components/schemas/Asset"
+          },
+          "from_account_iban": {
+            "type": "string"
+          },
+          "from_account_id": {
+            "type": "string"
+          },
+          "from_account_name": {
+            "title": "From Details\n",
+            "type": "string"
+          },
+          "from_bank_bic": {
+            "type": "string"
+          },
+          "from_bank_name": {
+            "type": "string"
+          },
+          "from_legal_entity_name": {
+            "type": "string"
+          },
+          "initiated_at": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "initiated_by": {
+            "$ref": "#/components/schemas/CustomerUser"
+          },
+          "intermediary_bank_bic": {
+            "type": "string"
+          },
+          "intermediary_bank_name": {
+            "title": "Intemediary Bank Details\n",
+            "type": "string"
+          },
+          "processed_at": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "to_account_iban": {
+            "type": "string"
+          },
+          "to_account_name": {
+            "title": "Beneficiary Details (Counterparty)\n",
+            "type": "string"
+          },
+          "to_bank_bic": {
+            "type": "string"
+          },
+          "to_bank_name": {
+            "type": "string"
+          },
+          "to_legal_entity_name": {
+            "title": "Might not be present, but we can use it instead of account name on frontend if\nit exists\n",
+            "type": "string"
+          }
+        },
+        "required": [
+          "amount",
+          "asset",
+          "description",
+          "initiated_at",
+          "processed_at",
+          "executed_at",
+          "attachment_ids",
+          "fee_amount",
+          "fee_asset",
+          "initiated_by",
+          "checked_by",
+          "checked_at",
+          "intermediary_bank_name",
+          "intermediary_bank_bic",
+          "from_account_name",
+          "from_account_iban",
+          "from_account_id",
+          "from_legal_entity_name",
+          "from_bank_name",
+          "from_bank_bic",
+          "to_account_name",
+          "to_account_iban",
+          "to_legal_entity_name",
+          "to_bank_name",
+          "to_bank_bic"
+        ],
+        "type": "object"
+      },
+      "CustomerTransactionType": {
+        "type": "string"
+      },
+      "EnrichedTransaction": {
+        "properties": {
+          "bulk_transfer": {
+            "$ref": "#/components/schemas/CustomerBulkTransfer"
+          },
+          "charge_fee": {
+            "$ref": "#/components/schemas/CustomerChargeFee"
+          },
+          "crypto_trade": {
+            "$ref": "#/components/schemas/CustomerCryptoOrder"
+          },
+          "customer_type": {
+            "$ref": "#/components/schemas/CustomerTransactionType"
+          },
+          "domestic_usd_incoming": {
+            "$ref": "#/components/schemas/CustomerDomesticUSDIncoming"
+          },
+          "domestic_usd_outgoing": {
+            "$ref": "#/components/schemas/CustomerDomesticUSDOutgoing"
+          },
+          "fi_to_fi_swift_incoming": {
+            "$ref": "#/components/schemas/CustomerFiToFiSwiftIncoming"
+          },
+          "fx_trade": {
+            "$ref": "#/components/schemas/CustomerFxTrade"
+          },
+          "gpss_incoming": {
+            "$ref": "#/components/schemas/CustomerGPSSIn"
+          },
+          "gpss_outgoing": {
+            "$ref": "#/components/schemas/CustomerGPSSOut"
+          },
+          "manual_journal_entry": {
+            "$ref": "#/components/schemas/CustomerManualJournalEntry"
+          },
+          "p2p": {
+            "$ref": "#/components/schemas/CustomerP2P"
+          },
+          "qcp_settlement": {
+            "$ref": "#/components/schemas/CustomerQcpSettlement"
+          },
+          "segregated_wallet_incoming": {
+            "$ref": "#/components/schemas/CustomerSegregatedWalletIncoming"
+          },
+          "segregated_wallet_outgoing": {
+            "$ref": "#/components/schemas/CustomerSegregatedWalletOutgoing"
+          },
+          "status": {
+            "$ref": "#/components/schemas/Status"
+          },
+          "swift_incoming": {
+            "$ref": "#/components/schemas/CustomerSwiftIncoming"
+          },
+          "swift_outgoing": {
+            "$ref": "#/components/schemas/CustomerSwiftOutgoing"
+          },
+          "timestamp": {
+            "format": "date-time",
+            "title": "ExecutedAt if available, else fallback to CreatedAt, used for ordering on the\ncustomer tx list, ordering will also be by timestamp\n",
+            "type": "string"
+          },
+          "transaction_id": {
+            "type": "string"
+          },
+          "type": {
+            "$ref": "#/components/schemas/TransactionType"
+          }
+        },
+        "required": [
+          "transaction_id",
+          "status",
+          "timestamp",
+          "type",
+          "customer_type",
+          "p2p",
+          "fx_trade",
+          "swift_outgoing",
+          "swift_incoming",
+          "fi_to_fi_swift_incoming",
+          "gpss_incoming",
+          "gpss_outgoing",
+          "charge_fee",
+          "bulk_transfer",
+          "manual_journal_entry",
+          "qcp_settlement",
+          "crypto_trade",
+          "segregated_wallet_incoming",
+          "segregated_wallet_outgoing",
+          "domestic_usd_incoming",
+          "domestic_usd_outgoing"
+        ],
+        "type": "object"
+      },
+      "TransferType": {
+        "type": "string"
+      },
+      "TransactionType": {
+        "type": "string"
+      },
+      "CustomerUser": {
+        "properties": {
+          "first_name": {
+            "type": "string"
+          },
+          "id": {
+            "$ref": "#/components/schemas/ID"
+          },
+          "last_name": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "first_name",
+          "last_name"
+        ],
+        "type": "object"
+      }
+    }
+  },
+  "info": {
+    "description": "Generated by Encore",
+    "title": "API for Pave Bank",
+    "version": "1.0",
+    "x-logo": {
+      "altText": "Encore logo",
+      "backgroundColor": "#EEEEE1",
+      "url": "https://encore.dev/assets/branding/logo/logo-black.png"
+    }
+  },
+  "openapi": "3.0.0",
+  "paths": {
+    "/accounts": {
+      "get": {
+        "operationId": "GET:apiv1_externalapi.ListParentAccounts",
+        "parameters": [
+          {
+            "allowEmptyValue": true,
+            "explode": true,
+            "in": "query",
+            "name": "page_size",
+            "schema": {
+              "format": "int64",
+              "type": "integer"
+            },
+            "style": "form"
+          },
+          {
+            "allowEmptyValue": true,
+            "explode": true,
+            "in": "query",
+            "name": "page_token",
+            "schema": {
+              "type": "string"
+            },
+            "style": "form"
+          },
+          {
+            "allowEmptyValue": true,
+            "explode": true,
+            "in": "query",
+            "name": "asset",
+            "schema": {
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "style": "form"
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "data": {
+                      "items": {
+                        "$ref": "#/components/schemas/ParentAccountResponse"
+                      },
+                      "type": "array"
+                    },
+                    "next_page_token": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "next_page_token",
+                    "data"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Success response"
+          },
+          "default": {
+            "$ref": "#/components/responses/APIError"
+          }
+        },
+        "summary": "Retrieves all parent accounts under the legal entity, it can be filtered by\nassets.\n"
+      }
+    },
+    "/accounts/{accountID}": {
+      "get": {
+        "operationId": "GET:apiv1_externalapi.GetParentAccount",
+        "parameters": [
+          {
+            "allowEmptyValue": true,
+            "explode": false,
+            "in": "path",
+            "name": "accountID",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "style": "simple"
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "account_type": {
+                      "$ref": "#/components/schemas/Type"
+                    },
+                    "asset": {
+                      "$ref": "#/components/schemas/Asset"
+                    },
+                    "balance_available": {
+                      "type": "string"
+                    },
+                    "balance_total": {
+                      "type": "string"
+                    },
+                    "created_at": {
+                      "format": "date-time",
+                      "type": "string"
+                    },
+                    "iban": {
+                      "type": "string"
+                    },
+                    "id": {
+                      "type": "string"
+                    },
+                    "name": {
+                      "type": "string"
+                    },
+                    "sub_accounts_count": {
+                      "format": "int64",
+                      "type": "integer"
+                    },
+                    "sub_accounts_spendable_balance": {
+                      "type": "string"
+                    },
+                    "sub_accounts_total_balance": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "id",
+                    "name",
+                    "balance_total",
+                    "balance_available",
+                    "account_type",
+                    "asset",
+                    "iban",
+                    "sub_accounts_count",
+                    "sub_accounts_total_balance",
+                    "sub_accounts_spendable_balance",
+                    "created_at"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Success response"
+          },
+          "default": {
+            "$ref": "#/components/responses/APIError"
+          }
+        },
+        "summary": "Retrieves the parent account for the given account ID.\n"
+      }
+    },
+    "/accounts/{accountID}/subaccounts": {
+      "get": {
+        "operationId": "GET:apiv1_externalapi.ListSubAccounts",
+        "parameters": [
+          {
+            "allowEmptyValue": true,
+            "explode": false,
+            "in": "path",
+            "name": "accountID",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "style": "simple"
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "data": {
+                      "items": {
+                        "$ref": "#/components/schemas/SubAccountResponse"
+                      },
+                      "type": "array"
+                    },
+                    "next_page_token": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "next_page_token",
+                    "data"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Success response"
+          },
+          "default": {
+            "$ref": "#/components/responses/APIError"
+          }
+        },
+        "summary": "Retrieves all subaccounts under the parent account.\n"
+      },
+      "post": {
+        "operationId": "POST:apiv1_externalapi.CreateSubAccount",
+        "parameters": [
+          {
+            "allowEmptyValue": true,
+            "explode": false,
+            "in": "path",
+            "name": "accountID",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "style": "simple"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "properties": {
+                  "description": {
+                    "type": "string"
+                  },
+                  "name": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "name",
+                  "description"
+                ],
+                "type": "object"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "account_type": {
+                      "$ref": "#/components/schemas/Type"
+                    },
+                    "asset": {
+                      "$ref": "#/components/schemas/Asset"
+                    },
+                    "balance_available": {
+                      "type": "string"
+                    },
+                    "balance_total": {
+                      "type": "string"
+                    },
+                    "created_at": {
+                      "format": "date-time",
+                      "type": "string"
+                    },
+                    "iban": {
+                      "type": "string"
+                    },
+                    "id": {
+                      "type": "string"
+                    },
+                    "name": {
+                      "type": "string"
+                    },
+                    "parent_account_id": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "id",
+                    "parent_account_id",
+                    "name",
+                    "balance_total",
+                    "balance_available",
+                    "account_type",
+                    "asset",
+                    "iban",
+                    "created_at"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Success response"
+          },
+          "default": {
+            "$ref": "#/components/responses/APIError"
+          }
+        },
+        "summary": "Creates a subaccount under the legal entity's parent account.\n"
+      }
+    },
+    "/accounts/{accountID}/subaccounts/{subAccountID}": {
+      "get": {
+        "operationId": "GET:apiv1_externalapi.GetSubAccount",
+        "parameters": [
+          {
+            "allowEmptyValue": true,
+            "explode": false,
+            "in": "path",
+            "name": "accountID",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "style": "simple"
+          },
+          {
+            "allowEmptyValue": true,
+            "explode": false,
+            "in": "path",
+            "name": "subAccountID",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "style": "simple"
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "account_type": {
+                      "$ref": "#/components/schemas/Type"
+                    },
+                    "asset": {
+                      "$ref": "#/components/schemas/Asset"
+                    },
+                    "balance_available": {
+                      "type": "string"
+                    },
+                    "balance_total": {
+                      "type": "string"
+                    },
+                    "created_at": {
+                      "format": "date-time",
+                      "type": "string"
+                    },
+                    "iban": {
+                      "type": "string"
+                    },
+                    "id": {
+                      "type": "string"
+                    },
+                    "name": {
+                      "type": "string"
+                    },
+                    "parent_account_id": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "id",
+                    "parent_account_id",
+                    "name",
+                    "balance_total",
+                    "balance_available",
+                    "account_type",
+                    "asset",
+                    "iban",
+                    "created_at"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Success response"
+          },
+          "default": {
+            "$ref": "#/components/responses/APIError"
+          }
+        },
+        "summary": "Retrieves the sub account for the given account ID and sub account ID.\n"
+      }
+    },
+    "/balance/{accountID}": {
+      "get": {
+        "operationId": "GET:apiv1_externalapi.GetBalanceSummary",
+        "parameters": [
+          {
+            "allowEmptyValue": true,
+            "explode": false,
+            "in": "path",
+            "name": "accountID",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "style": "simple"
+          },
+          {
+            "allowEmptyValue": true,
+            "explode": true,
+            "in": "query",
+            "name": "date",
+            "schema": {
+              "type": "string"
+            },
+            "style": "form"
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "asset": {
+                      "$ref": "#/components/schemas/Asset"
+                    },
+                    "closing_balance_posted": {
+                      "$ref": "#/components/schemas/Amount"
+                    },
+                    "closing_balance_spendable": {
+                      "$ref": "#/components/schemas/Amount"
+                    },
+                    "closing_balance_total": {
+                      "$ref": "#/components/schemas/Amount"
+                    },
+                    "credit_pending_amounts": {
+                      "$ref": "#/components/schemas/Amount"
+                    },
+                    "credit_pending_counts": {
+                      "format": "int64",
+                      "type": "integer"
+                    },
+                    "credit_pending_posted_amounts": {
+                      "$ref": "#/components/schemas/Amount"
+                    },
+                    "credit_pending_posted_counts": {
+                      "format": "int64",
+                      "type": "integer"
+                    },
+                    "credit_pending_voided_amounts": {
+                      "$ref": "#/components/schemas/Amount"
+                    },
+                    "credit_pending_voided_counts": {
+                      "format": "int64",
+                      "type": "integer"
+                    },
+                    "credit_posted_amounts": {
+                      "$ref": "#/components/schemas/Amount"
+                    },
+                    "credit_posted_counts": {
+                      "format": "int64",
+                      "type": "integer"
+                    },
+                    "date": {
+                      "format": "date-time",
+                      "type": "string"
+                    },
+                    "debit_pending_amounts": {
+                      "$ref": "#/components/schemas/Amount"
+                    },
+                    "debit_pending_counts": {
+                      "format": "int64",
+                      "type": "integer"
+                    },
+                    "debit_pending_posted_amounts": {
+                      "$ref": "#/components/schemas/Amount"
+                    },
+                    "debit_pending_posted_counts": {
+                      "format": "int64",
+                      "type": "integer"
+                    },
+                    "debit_pending_voided_amounts": {
+                      "$ref": "#/components/schemas/Amount"
+                    },
+                    "debit_pending_voided_counts": {
+                      "format": "int64",
+                      "type": "integer"
+                    },
+                    "debit_posted_amounts": {
+                      "$ref": "#/components/schemas/Amount"
+                    },
+                    "debit_posted_counts": {
+                      "format": "int64",
+                      "type": "integer"
+                    },
+                    "id": {
+                      "$ref": "#/components/schemas/ID"
+                    },
+                    "opening_balance_posted": {
+                      "$ref": "#/components/schemas/Amount"
+                    },
+                    "opening_balance_spendable": {
+                      "$ref": "#/components/schemas/Amount"
+                    },
+                    "opening_balance_total": {
+                      "$ref": "#/components/schemas/Amount"
+                    }
+                  },
+                  "required": [
+                    "id",
+                    "asset",
+                    "opening_balance_total",
+                    "closing_balance_total",
+                    "opening_balance_spendable",
+                    "closing_balance_spendable",
+                    "opening_balance_posted",
+                    "closing_balance_posted",
+                    "debit_posted_counts",
+                    "credit_posted_counts",
+                    "debit_pending_counts",
+                    "credit_pending_counts",
+                    "debit_pending_posted_counts",
+                    "credit_pending_posted_counts",
+                    "debit_pending_voided_counts",
+                    "credit_pending_voided_counts",
+                    "debit_posted_amounts",
+                    "credit_posted_amounts",
+                    "debit_pending_amounts",
+                    "credit_pending_amounts",
+                    "debit_pending_posted_amounts",
+                    "credit_pending_posted_amounts",
+                    "debit_pending_voided_amounts",
+                    "credit_pending_voided_amounts",
+                    "date"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Success response"
+          },
+          "default": {
+            "$ref": "#/components/responses/APIError"
+          }
+        },
+        "summary": "Retrieves the balance summary for the given parent account ID, can be filtered\nby date.\n"
+      }
+    },
+    "/statement/csv": {
+      "get": {
+        "operationId": "GET:apiv1_externalapi.GenerateBankStatementCsvFile",
+        "parameters": [
+          {
+            "allowEmptyValue": true,
+            "explode": true,
+            "in": "query",
+            "name": "account_ids",
+            "required": true,
+            "schema": {
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "style": "form"
+          },
+          {
+            "allowEmptyValue": true,
+            "explode": true,
+            "in": "query",
+            "name": "start_date",
+            "schema": {
+              "type": "string"
+            },
+            "style": "form"
+          },
+          {
+            "allowEmptyValue": true,
+            "explode": true,
+            "in": "query",
+            "name": "end_date",
+            "schema": {
+              "type": "string"
+            },
+            "style": "form"
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "file_name": {
+                      "title": "Includes the file extension as well\n",
+                      "type": "string"
+                    },
+                    "url": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "file_name",
+                    "url"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Success response"
+          },
+          "default": {
+            "$ref": "#/components/responses/APIError"
+          }
+        },
+        "summary": "Generates a CSV file of a bank statement. Can be filtered by account IDs,\nstart date and end date.\n"
+      }
+    },
+    "/transactions": {
+      "get": {
+        "operationId": "GET:apiv1_externalapi.Transactions",
+        "parameters": [
+          {
+            "allowEmptyValue": true,
+            "explode": true,
+            "in": "query",
+            "name": "account_ids",
+            "schema": {
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "style": "form"
+          },
+          {
+            "allowEmptyValue": true,
+            "explode": true,
+            "in": "query",
+            "name": "statuses",
+            "schema": {
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "style": "form"
+          },
+          {
+            "allowEmptyValue": true,
+            "explode": true,
+            "in": "query",
+            "name": "assets",
+            "schema": {
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "style": "form"
+          },
+          {
+            "allowEmptyValue": true,
+            "explode": true,
+            "in": "query",
+            "name": "type",
+            "schema": {
+              "type": "string"
+            },
+            "style": "form"
+          },
+          {
+            "allowEmptyValue": true,
+            "explode": true,
+            "in": "query",
+            "name": "transaction_ids",
+            "schema": {
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "style": "form"
+          },
+          {
+            "allowEmptyValue": true,
+            "explode": true,
+            "in": "query",
+            "name": "include_bulk",
+            "schema": {
+              "type": "boolean"
+            },
+            "style": "form"
+          },
+          {
+            "allowEmptyValue": true,
+            "explode": true,
+            "in": "query",
+            "name": "start_date",
+            "schema": {
+              "type": "string"
+            },
+            "style": "form"
+          },
+          {
+            "allowEmptyValue": true,
+            "explode": true,
+            "in": "query",
+            "name": "end_date",
+            "schema": {
+              "type": "string"
+            },
+            "style": "form"
+          },
+          {
+            "allowEmptyValue": true,
+            "explode": true,
+            "in": "query",
+            "name": "page_size",
+            "schema": {
+              "format": "int64",
+              "type": "integer"
+            },
+            "style": "form"
+          },
+          {
+            "allowEmptyValue": true,
+            "explode": true,
+            "in": "query",
+            "name": "next_page_token",
+            "schema": {
+              "type": "string"
+            },
+            "style": "form"
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "data": {
+                      "items": {
+                        "$ref": "#/components/schemas/EnrichedTransaction"
+                      },
+                      "type": "array"
+                    },
+                    "next_page_token": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "next_page_token",
+                    "data"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Success response"
+          },
+          "default": {
+            "$ref": "#/components/responses/APIError"
+          }
+        },
+        "summary": "Retrieves transactions by given filters. Can be filtered by account IDs,\nstatuses, assets, type, transaction IDs, include bulk, start date, end date,\npage size and next page token.\n"
+      }
+    },
+    "/transfer/account": {
+      "post": {
+        "operationId": "POST:apiv1_externalapi.CreateAccountTransfer",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "properties": {
+                  "amount": {
+                    "$ref": "#/components/schemas/Amount"
+                  },
+                  "description": {
+                    "type": "string"
+                  },
+                  "destination_iban": {
+                    "type": "string"
+                  },
+                  "source_iban": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "source_iban",
+                  "destination_iban",
+                  "amount",
+                  "description"
+                ],
+                "type": "object"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "transaction_id": {
+                      "$ref": "#/components/schemas/ID"
+                    }
+                  },
+                  "required": [
+                    "transaction_id"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Success response"
+          },
+          "default": {
+            "$ref": "#/components/responses/APIError"
+          }
+        },
+        "summary": "Initiates a transfer between legal entity's accounts.\n"
+      }
+    },
+    "/transfer/internal": {
+      "post": {
+        "operationId": "POST:apiv1_externalapi.CreateInternalTransfer",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "properties": {
+                  "amount": {
+                    "$ref": "#/components/schemas/Amount"
+                  },
+                  "description": {
+                    "type": "string"
+                  },
+                  "destination_iban": {
+                    "type": "string"
+                  },
+                  "source_iban": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "source_iban",
+                  "destination_iban",
+                  "amount",
+                  "description"
+                ],
+                "type": "object"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "transaction_id": {
+                      "$ref": "#/components/schemas/ID"
+                    }
+                  },
+                  "required": [
+                    "transaction_id"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Success response"
+          },
+          "default": {
+            "$ref": "#/components/responses/APIError"
+          }
+        },
+        "summary": "Initiates a transfer between legal entities within Pave Bank.\n"
+      }
+    },
+    "/transfer/rtgs": {
+      "post": {
+        "operationId": "POST:apiv1_externalapi.CreateGpssTransfer",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "properties": {
+                  "additional_description": {
+                    "type": "string"
+                  },
+                  "amount": {
+                    "$ref": "#/components/schemas/Amount"
+                  },
+                  "description": {
+                    "type": "string"
+                  },
+                  "destination_iban": {
+                    "type": "string"
+                  },
+                  "destination_name": {
+                    "type": "string"
+                  },
+                  "source_iban": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "source_iban",
+                  "destination_iban",
+                  "destination_name",
+                  "amount",
+                  "description",
+                  "additional_description"
+                ],
+                "type": "object"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "transaction_id": {
+                      "$ref": "#/components/schemas/ID"
+                    }
+                  },
+                  "required": [
+                    "transaction_id"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Success response"
+          },
+          "default": {
+            "$ref": "#/components/responses/APIError"
+          }
+        },
+        "summary": "Initiates a bank-to-bank transfer via the Georgian RTGS system.\n"
+      }
+    }
+  },
+  "servers": [
+    {
+      "description": "Pave Bank Developer API",
+      "url": "https://api.pavebank.com/v1"
+    }
+  ]
+}
