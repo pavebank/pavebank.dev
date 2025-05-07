@@ -1,47 +1,19 @@
 <!DOCTYPE html>
-<html lang="en">
-
-<head>
-  <meta charset="UTF-8">
-  <title>Pave Bank</title>
-  <link href="https://fonts.googleapis.com/css?family=Roboto+Mono" rel="stylesheet">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  <style>
-    body {
-      background: linear-gradient(to bottom, #FFFF66, #FFCC99);
-      font-family: 'Roboto Mono', monospace;
-    }
-
-    .center {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-    }
-
-    .title-box {
-      display: inline-block;
-      padding: 20px;
-      border-radius: 50px;
-      background-color: white;
-    }
-  </style>
-</head>
-
-<body>
-  <div class="center">
-    <div class="title-box">
-      <h1 id="title">Nothing to see here</h1>
-    </div>
-  </div>
-  <script>
-    var titles = ["nothing to see here", "turing complete banking", "unbinding cyclomatic complexity", "upgrading fiat to 2.0", "quantum proofing banking", "installing economy 3.0", "recentralizing decentralized finance", "banking unbanked AGI", "waiting for enabling tech", "reduce focus.lengthOf to 1", "finetuning financial latent space embeddings", "enabling utf32 account names", "disambiguating currency types","solving brewers conjecture", "detecting halting states", "flipping asset/liability signs (again)", "crafting artisnal nano-services", "fixing distributed monolith", "decruftifying", "tweaking TLS ciphersuites for audit", "s/USD/SGD/g", "painting bikesheds gradient", "USE well_weapon_totally_mexico_db", "adding emoji support"];
-    var title = document.getElementById("title");
-    setInterval(function () {
-      var randomIndex = Math.floor(Math.random() * titles.length);
-      title.innerText = titles[randomIndex];
-    }, 3000);
-  </script>
-</body>
-
+<html>
+  <head>
+    <title>API Documentation</title>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,700|Roboto:300,400,700" rel="stylesheet">
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <redoc spec-url="openapi.yaml"></redoc>
+    <script src="https://cdn.redoc.ly/redoc/latest/bundles/redoc.standalone.js"></script>
+  </body>
 </html>
